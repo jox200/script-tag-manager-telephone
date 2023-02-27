@@ -1,0 +1,62 @@
+<script>
+  var g_ED = {
+
+    "email_nohash" : '[name="cli_email"]'
+
+  }
+
+
+
+  window.enhanced_conversion_data = window.enhanced_conversion_data || {};
+
+  document.addEventListener('input', g_save_toLocalStorage);
+
+  function g_save_toLocalStorage(e) {
+
+    var input = e.target;
+
+    for(i in g_ED) {
+
+      if(input.matches(g_ED[i]) ){
+
+        localStorage['g_'+ i] = input.value;
+
+      }
+
+    }
+
+    g_setup_Enhanced_Conversion_Data();
+
+  }
+
+
+
+  function g_setup_Enhanced_Conversion_Data(){
+
+    for(i in g_ED) {
+
+      
+
+      if(localStorage['g_' + i]) {
+
+        if(i == 'email_nohash') {
+
+          window.enhanced_conversion_data[i] = localStorage['g_' + i];
+
+          window.enhanced_conversion_data[i] = window.enhanced_conversion_data[i].replace(/\D/g, '');
+
+        }
+
+      }
+
+      
+
+    }
+
+  }
+
+
+
+  g_setup_Enhanced_Conversion_Data();
+
+</script>
